@@ -7,17 +7,13 @@ class Posts extends React.Component {
     let allData = DataStore.getAll();
     let allPosts = allData.posts;
     this.state = {allPosts}
+    this.state.showEdit = {display: 'false'}
     
-    this.editTitle = this.editTitle.bind(this)
-    this.editContent = this.editContent.bind(this)
-  }
-  
-  editTitle(titleId){
-    console.log(titleId.target);
+    this.showEdit = this.showEdit.bind(this)
   }
 
-  editContent(contentId){
-    console.log(contentId.target);
+  showEdit(id){
+    console.log(id.target);
   }
 
   render() {
@@ -26,8 +22,8 @@ class Posts extends React.Component {
         <p><i>Click on any item to edit</i></p>
         {this.state.allPosts.map((data, i) =>
           <div key={data.id}>
-            <h2 id={data.id + "_title"} dangerouslySetInnerHTML={{ __html: data.title.rendered  }} onClick={this.editTitle}></h2>       
-            <p id={data.id + "_content"} dangerouslySetInnerHTML={{ __html: data.content.rendered  }} onClick={this.editContent}></p>
+            <h2 id={data.id + "_title"} dangerouslySetInnerHTML={{ __html: data.title.rendered  }} onClick={this.showEdit}></h2>       
+            <p id={data.id + "_content"} dangerouslySetInnerHTML={{ __html: data.content.rendered  }} onClick={this.showEdit}></p>
             <hr/>          
           </div>    
         )}
