@@ -1,6 +1,6 @@
 import {render}             from 'react-dom';
 import DataActions          from 'flux/actions/DataActions.js'
-import Home                 from 'components/Home.js';
+import Posts                 from 'components/Posts.js';
 
 import {
   BrowserRouter as Router,
@@ -16,7 +16,7 @@ class AppInitializer {
         <Router>
           <div>
             <Switch>
-                <Route path="/" component={ Home } exact />
+                <Route path="/" component={ Posts } exact />
                 <Route render={() => { return <Redirect to="/" /> }} />
             </Switch> 
           </div>
