@@ -10,16 +10,15 @@ class Posts extends React.Component {
     let allPosts = allData.posts;
     this.state = {allPosts}
 
-    this.updateTitle = this.updateTitle.bind(this)
-    this.updateContent = this.updateContent.bind(this)
-    
+    this.editTitle = this.editTitle.bind(this)
+    this.editContent = this.editContent.bind(this)
   }
 
-  updateTitle(e){
+  editTitle(e, data){    
     this.setState({html: e.target.value});
   }
   
-  updateContent(e){
+  editContent(e, data){
     this.setState({html: e.target.value});
   }
 
@@ -31,20 +30,17 @@ class Posts extends React.Component {
           <div key={data.id} ref={data.id}>
             <ContentEditable
               tagName = 'h2'
-              id = { data.id }
-              className = "post_title"
+              className = 'post_title'
               html={data.title.rendered}
               disabled={false}      
-              onChange={this.updateTitle} 
+              onChange={(e) => this.editTitle(e, data)} 
             />
-
             <ContentEditable  
               tagName = 'p'
-              className = "post_content" 
-              id = { data.id }      
+              className = 'post_content'    
               html={data.content.rendered}
               disabled={false}      
-              onChange={this.updateContent}
+              onChange={(e) => this.editContent(e, data)}
             /> 
             <hr />
           </div>
