@@ -5,7 +5,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {	
 	devtool: 'source-map',
 	devServer: {
-		historyApiFallback: true, // This will make the server understand "/some-link" routs instead of "/#/some-link"
+		historyApiFallback: true, // This will make the server understand "/some-link" routs instead of "/#/some-link",
+		headers: {
+		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+		"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+		}
 	},
 	entry: [
 		'./src/scripts' // This is where Webpack will be looking for the entry index.js file
