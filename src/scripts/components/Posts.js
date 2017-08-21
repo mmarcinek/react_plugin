@@ -1,4 +1,6 @@
 import DataStore from 'flux/stores/DataStore.js';
+import ContentEditable from 'react-contenteditable';
+
 // require("css-loader!./src/scripts/components/Posts.css");
 
 class Posts extends React.Component {
@@ -7,13 +9,12 @@ class Posts extends React.Component {
     let allData = DataStore.getAll();
     let allPosts = allData.posts;
     this.state = {allPosts}
-    this.state.showEdit = {display: 'false'}
-    
-    this.showEdit = this.showEdit.bind(this)
+
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  showEdit(id){
-    console.log(id.target);
+  handleChange(e){
+    this.setState({html: e.target.value});
   }
 
   render() {
@@ -22,10 +23,22 @@ class Posts extends React.Component {
         <p><i>Click on any item to edit</i></p>
         {this.state.allPosts.map((data, i) =>
           <div key={data.id}>
-            <h2 id={data.id + "_title"} dangerouslySetInnerHTML={{ __html: data.title.rendered  }} onClick={this.showEdit}></h2>       
-            <p id={data.id + "_content"} dangerouslySetInnerHTML={{ __html: data.content.rendered  }} onClick={this.showEdit}></p>
-            <hr/>          
-          </div>    
+            <h2 className="post_title">
+              <ContentEditable
+                html={data.title.rendered} 
+                disabled={false}      
+                onChange={this.handleChange} 
+              />
+            </h2>  
+            <div className="post_content">
+            <ContentEditable         
+              html={data.content.rendered} 
+              disabled={false}      
+              onChange={this.handleChange}
+            /> 
+            </div>
+            <hr />
+          </div>
         )}
       </div>      
       )
