@@ -1,4 +1,5 @@
 import {render}             from 'react-dom';
+import DataActions          from 'flux/actions/DataActions.js'
 import Home                 from 'components/Home.js';
 
 import {
@@ -10,18 +11,20 @@ import {
 
 class AppInitializer {
   run() {
-    render(
-      <Router>
-        <div>
-          <Switch>
-            <Route path="/" component={ Home } exact />
-            <Route render={() => { return <Redirect to="/" /> }} />
-          </Switch> 
-        </div>
-      </Router>
+    DataActions.getPages((response)=>{
+      render(
+        <Router>
+          <div>
+            <Switch>
+                <Route path="/" component={ Home } exact />
+                <Route render={() => { return <Redirect to="/" /> }} />
+            </Switch> 
+          </div>
+        </Router>
 
-      , document.getElementById('app')
-    );
+        , document.getElementById('app')
+      );
+    });
   }
 }
 
