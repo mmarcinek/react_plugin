@@ -1,4 +1,5 @@
-import DataStore from 'flux/stores/DataStore.js'
+import DataStore from 'flux/stores/DataStore.js';
+// require("css-loader!./src/scripts/components/Posts.css");
 
 class Posts extends React.Component {
   constructor(){
@@ -10,7 +11,7 @@ class Posts extends React.Component {
     this.editTitle = this.editTitle.bind(this)
     this.editContent = this.editContent.bind(this)
   }
-
+  
   editTitle(titleId){
     console.log(titleId.target);
   }
@@ -18,7 +19,6 @@ class Posts extends React.Component {
   editContent(contentId){
     console.log(contentId.target);
   }
-
 
   render() {
     return (
@@ -28,6 +28,7 @@ class Posts extends React.Component {
           <div key={data.id}>
             <h2 id={data.id + "_title"} dangerouslySetInnerHTML={{ __html: data.title.rendered  }} onClick={this.editTitle}></h2>       
             <p id={data.id + "_content"} dangerouslySetInnerHTML={{ __html: data.content.rendered  }} onClick={this.editContent}></p>
+            <hr/>          
           </div>    
         )}
       </div>      

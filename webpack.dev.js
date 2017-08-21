@@ -43,6 +43,10 @@ module.exports = {
 				],
 				loader: ['react-hot-loader']
 			},
+      {
+        test: /\.css$/,
+        loader:'style-loader!css-loader!'
+      },
 			{
 				loader: "babel-loader",
 
