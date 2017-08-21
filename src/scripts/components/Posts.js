@@ -10,10 +10,16 @@ class Posts extends React.Component {
     let allPosts = allData.posts;
     this.state = {allPosts}
 
-    this.handleChange = this.handleChange.bind(this)
+    this.updateTitle = this.updateTitle.bind(this)
+    this.updateContent = this.updateContent.bind(this)
+    
   }
 
-  handleChange(e){
+  updateTitle(e){
+    this.setState({html: e.target.value});
+  }
+  
+  updateContent(e){
     this.setState({html: e.target.value});
   }
 
@@ -22,21 +28,24 @@ class Posts extends React.Component {
       (<div>
         <p><i>Click on any item to edit</i></p>
         {this.state.allPosts.map((data, i) =>
-          <div key={data.id}>
-            <h2 className="post_title">
-              <ContentEditable
-                html={data.title.rendered} 
-                disabled={false}      
-                onChange={this.handleChange} 
-              />
-            </h2>  
-            <div className="post_content">
-            <ContentEditable         
-              html={data.content.rendered} 
+          <div key={data.id} ref={data.id}>
+            <ContentEditable
+              tagName = 'h2'
+              id = { data.id }
+              className = "post_title"
+              html={data.title.rendered}
               disabled={false}      
-              onChange={this.handleChange}
+              onChange={this.updateTitle} 
+            />
+
+            <ContentEditable  
+              tagName = 'p'
+              className = "post_content" 
+              id = { data.id }      
+              html={data.content.rendered}
+              disabled={false}      
+              onChange={this.updateContent}
             /> 
-            </div>
             <hr />
           </div>
         )}
