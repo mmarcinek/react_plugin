@@ -1,0 +1,47 @@
+.body {
+  background-color: #FEFEFE;
+  width: 100%;
+}
+
+#app {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.edit-instructions {
+  margin: 15px 25px 25px 25px;
+}
+
+.post-wrapper{
+  margin: 15px 25px 30px 25px;    
+}
+
+.post-title {
+  font-family: 'Lato', sans-serif;
+  padding-left: 10px;
+}
+
+.post-content {
+  font-family: 'Merriweather', serif;
+  padding: 0 40px 0 40px;
+  margin-bottom: 40px;
+}
+
+.post-content > p > p > img {
+  display: block;
+  margin: 0 auto 35px auto;
+}
+
+.title-break {
+  margin: -15px 0 25px 0;
+}
+
+.post-divider {
+  height: 10px;
+	border: 0;
+  box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}

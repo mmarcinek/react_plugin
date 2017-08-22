@@ -8,10 +8,11 @@ class DataActions {
 
     this.pagesEndPoint = `${appUrl}/wp-json/wp/v2/pages`; // Endpoint for getting Wordpress Pages
     this.postsEndPoint = `${appUrl}/wp-json/wp/v2/posts?per_page=5`; // Endpoint for getting Wordpress Posts
+    this.updatePostsEndPoint = `${appUrl}/wp-json/wp/v2/posts`;
   }
 
   // Method for getting data from the provided end point url
-  api(endPoint) {
+  apiGet(endPoint) {
     return new Promise((resolve, reject) => {
       axios.get(endPoint).then((response) => {
         resolve(response.data);
@@ -21,9 +22,22 @@ class DataActions {
     });     
   }
 
+  // Method for updating data to the provided end point url
+  apiPost(endpoint, postObject) {
+    axios.post(endpoint, {
+      postObject
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   // Method for getting Pages data
   getPages(cb){
-    this.api(this.pagesEndPoint).then((response)=>{
+    this.apiGet(this.pagesEndPoint).then((response)=>{
     this.getPosts(response, cb)
     });
     return true;
@@ -31,7 +45,7 @@ class DataActions {
 
   // Method for getting Posts data
   getPosts(pages, cb){
-    this.api(this.postsEndPoint).then((response)=>{
+    this.apiGet(this.postsEndPoint).then((response)=>{
       const posts     = response
       const payload   = { pages, posts };
 
@@ -45,6 +59,16 @@ class DataActions {
   // The Alt Store will listen for this method to fire and will store the returned data
   getSuccess(payload){
     return payload;
+  }
+
+  // Method to build post title 
+  updatePost(id, obj){
+    let postObject = {
+      id: id,
+      title: obj.title,
+      content: obj.content
+    }
+    this.apiPost(this.updatePostsEndPoint, postObject)
   }
 }
 

@@ -1,7 +1,6 @@
 import DataStore from 'flux/stores/DataStore.js';
+import DataActions  from 'flux/actions/DataActions.js';
 import ContentEditable from 'react-contenteditable';
-
-// require("css-loader!./src/scripts/components/Posts.css");
 
 class Posts extends React.Component {
   constructor(){
@@ -16,33 +15,45 @@ class Posts extends React.Component {
 
   editTitle(e, data){    
     this.setState({html: e.target.value});
+    let updateObj = {
+      title: e.target.value,
+      content: data.content
+    }
+    DataActions.updatePost(data.id, updateObj)
   }
   
   editContent(e, data){
     this.setState({html: e.target.value});
+    let updateObj = {
+      title: data.title,
+      content: e.target.value
+    }
+    DataActions.updatePost(data.id, updateObj)    
   }
 
   render() {
     return (
       (<div>
-        <p><i>Click on any item to edit</i></p>
+        <p className="edit-instructions"><i>Click on any item to edit</i></p>
         {this.state.allPosts.map((data, i) =>
-          <div key={data.id} ref={data.id}>
+          <div key={data.id} ref={data.id} className="post-wrapper">
             <ContentEditable
-              tagName = 'h2'
-              className = 'post_title'
+              tagName='h2'
+              className='post-title'
               html={data.title.rendered}
               disabled={false}      
               onChange={(e) => this.editTitle(e, data)} 
             />
-            <ContentEditable  
-              tagName = 'p'
-              className = 'post_content'    
-              html={data.content.rendered}
-              disabled={false}      
-              onChange={(e) => this.editContent(e, data)}
-            /> 
-            <hr />
+            <hr className="title-break"/>
+            <div className='post-content'>
+              <ContentEditable  
+                tagName = 'p'
+                html={data.content.rendered}
+                disabled={false}      
+                onChange={(e) => this.editContent(e, data)}
+              /> 
+            </div>
+            <hr className="post-divider"/>
           </div>
         )}
       </div>      
