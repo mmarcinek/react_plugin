@@ -7,9 +7,9 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true, // This will make the server understand "/some-link" routs instead of "/#/some-link",
 		headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+			"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
 		}
 	},
 	entry: [
@@ -25,7 +25,8 @@ module.exports = {
 			'node_modules', 
 			'src',
 			path.resolve(__dirname, 'src/scripts'),
-			path.resolve(__dirname, 'node_modules')
+			path.resolve(__dirname, 'node_modules'),
+       path.resolve( __dirname, 'post-plugin-mmarcinek.php' )
 		], // Folders where Webpack is going to look for files to bundle together
 		extensions: ['.jsx', '.js'] // Extensions that Webpack is going to expect
 	},
