@@ -81,9 +81,9 @@ class DataActions {
     this.apiPost(updateUrl, postObject)
   }
 
-  deletePost(id, updateObj){
+  deletePost(id){
     let deleteURl = this.updatePostsEndPoint + `${id}`;   
-    this.apiDelete(this.updateDeleteEndPoint, updateObj)
+    this.apiDelete(this.updateDeleteEndPoint)
   }
 }
 
