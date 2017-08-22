@@ -8,7 +8,7 @@ class DataActions {
 
     this.pagesEndPoint = `${appUrl}/wp-json/wp/v2/pages`; // Endpoint for getting Wordpress Pages
     this.postsEndPoint = `${appUrl}/wp-json/wp/v2/posts?per_page=5`; // Endpoint for getting Wordpress Posts
-    this.updatePostsEndPoint = `${appUrl}/wp-json/wp/v2/posts`;
+    this.updatePostsEndPoint = `${appUrl}/wp-json/wp/v2/posts/`; // Endpoint for editing/deleting posts 
   }
 
   // Method for getting data from the provided end point url
@@ -33,6 +33,16 @@ class DataActions {
     .catch(function (error) {
       console.log(error);
     });
+  }
+
+  apiDelete(endpoint){
+    axios.delete(endpoint)
+    .then(function (response){
+      console.log(response);
+    })
+    .catch(function (error){
+      console.log(error)
+    })
   }
 
   // Method for getting Pages data
@@ -63,12 +73,17 @@ class DataActions {
 
   // Method to build post title 
   updatePost(id, obj){
+    let updateUrl = this.updatePostsEndPoint + `${id}`
     let postObject = {
-      id: id,
       title: obj.title,
       content: obj.content
     }
-    this.apiPost(this.updatePostsEndPoint, postObject)
+    this.apiPost(updateUrl, postObject)
+  }
+
+  deletePost(id, updateObj){
+    let deleteURl = this.updatePostsEndPoint + `${id}`;   
+    this.apiDelete(this.updateDeleteEndPoint, updateObj)
   }
 }
 

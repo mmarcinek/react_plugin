@@ -42,6 +42,16 @@
   box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
 
+.delete-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  padding: 7px;  
+  border: none;
+  color: #fefefe;
+  background: #3dacac;
+  margin-left: 90%;
+}
+
 [contenteditable]:focus {
     outline: 0px solid transparent;
 }

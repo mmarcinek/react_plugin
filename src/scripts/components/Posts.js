@@ -11,6 +11,7 @@ class Posts extends React.Component {
 
     this.editTitle = this.editTitle.bind(this)
     this.editContent = this.editContent.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
   editTitle(e, data){    
@@ -29,6 +30,14 @@ class Posts extends React.Component {
       content: e.target.value
     }
     DataActions.updatePost(data.id, updateObj)    
+  }
+
+  delete(e, data){
+    let updateObj = {
+      title: data.title,
+      content: data.content
+    }
+    DataActions.deletePost(data.id, updateObj)
   }
 
   render() {
@@ -53,6 +62,7 @@ class Posts extends React.Component {
                 onChange={(e) => this.editContent(e, data)}
               /> 
             </div>
+            <button className="delete-btn" onClick={(e) => this.delete(e, data)}>Delete</button>
             <hr className="post-divider"/>
           </div>
         )}
